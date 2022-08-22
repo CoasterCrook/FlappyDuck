@@ -9,6 +9,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpVolume = 10f;
 
     Rigidbody2D birdRigidBody2D;
+    GameManager gameManager;
+    
+    void Awake() 
+    {
+        gameManager = FindObjectOfType<GameManager>();
+    }
 
     void Start() 
     {
@@ -18,5 +24,17 @@ public class PlayerMovement : MonoBehaviour
     void OnJump(InputValue value)
     {
         birdRigidBody2D.velocity = Vector2.up * jumpVolume;
+    }
+
+    void OnTriggerEnter2D(Collider2D other) 
+    {
+        if (other.tag == "Score")
+        {
+            gameManager.IncreaseScore();
+        }
+        else if (other.tag == "Obstacle")
+        {
+            gameManager.GameOver();
+        }
     }
 }
