@@ -9,7 +9,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] float minHeight = -1f;
     [SerializeField] float maxHeight = 1f;
 
-    void OnEnable() 
+    void Start() 
     {
         InvokeRepeating(nameof(SpawnPipes), spawnRate, spawnRate);
     }
